@@ -5,15 +5,11 @@ typedef struct node {                      // single list node
     int data;                              // stored value
     struct node *next;                     // pointer to next node
 } Node;
-
 Node *head = NULL;                         // head of the list
 
 Node* newNode(int data) {                 // allocate and init node
     Node *n = (Node*)malloc(sizeof(Node)); // allocate memory for node
-    if (!n) {                              // check allocation
-        printf("Memory allocation failed!\n");
-        exit(1);
-    }
+    if (!n ? (printf("Memory allocation failed!\n"), 1) : 0 ) exit(1); // Check allocation
     n->data = data; n->next = NULL;       // set fields
     return n;
 }
@@ -26,9 +22,7 @@ void insertFront(int data) {               // insert at beginning
 
 void insertLast(int data) {                // insert at end
     Node *n = newNode(data);               // create node
-    if (!head) {                           // empty list
-        head = n; return;                  // new node is head; done
-    } 
+    if (!head ? (head = n , 1) : 0 ) return ;   // empty list
     Node *temp = head;                     // traverse to last
     while (temp->next)                     // move until last node
         temp = temp->next;
@@ -36,10 +30,7 @@ void insertLast(int data) {                // insert at end
 }
 
 void deleteFront() {                       // remove from beginning
-    if (!head) {                           // empty check
-        printf("List is empty!\n");
-        return;
-    }
+    if (!head ? (printf("List is empty!\n"), 1) : 0 ) return; // empty list
     Node *temp = head;                     // node to delete
     printf("Deleted element is: %d\n", temp->data);
     head = head->next;                     // move head forward
@@ -47,10 +38,7 @@ void deleteFront() {                       // remove from beginning
 }
 
 void deleteLast() {                        // remove from end
-    if (!head) {                           // empty list
-        printf("List is empty!\n");
-        return;
-    }
+    if (!head ? (printf("List is empty!\n"), 1) : 0 ) return; // empty list
     if (!head->next) {                     // single node case
         printf("Deleted element is: %d\n", head->data);
         free(head);
@@ -66,10 +54,7 @@ void deleteLast() {                        // remove from end
 }
 
 void display() {                           // print list contents
-    if (!head) {                           // empty check
-        printf("List is empty!\n");
-        return;
-    }
+    if (!head ? (printf("List is empty!\n"), 1) : 0 ) return; // empty list
     Node *temp = head;                     // iterate from head
     printf("List elements are:\n");
     while (temp) {
@@ -83,7 +68,7 @@ int main() {                               // menu driven driver
     int ch, data;
     do {
         printf("\n1. Insert Front\n2. Insert Rear\n3. Delete Front\n4. Delete Rear\n5. Display\n6. Exit\n");
-        printf("Enter your choice: ");
+        printf("Enter your Choice: ");
         scanf("%d", &ch);
 
         if (ch == 1) {                      // insert at front
