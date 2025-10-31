@@ -5,15 +5,11 @@ typedef struct node {                     // Node structure for deque
     int data;                            // Store element value
     struct node *next;                   // Link to next node
 } Node;
-
 Node *front = NULL, *rear = NULL;         // Front and rear pointers
 
 Node* newNode(int value) {               // Create new node with given value
     Node *n = malloc(sizeof(Node));      // Allocate memory
-    if (!n) { 
-        printf("Memory allocation failed!\n");  // Check allocation
-        exit(1); 
-    }
+    if (!n ? (printf("Memory allocation failed!\n"), 1) : 0 ) exit(1); // Check allocation
     n->data = value; n->next = NULL;     // Initialize node data
     return n;
 }
@@ -27,15 +23,11 @@ void insertFront(int data) {             // Add node at front
 
 void insertLast(int data) {              // Add node at rear
     Node *n = newNode(data);             // Create new node
-    if (!rear) front = rear = n;         // If first node
-    else rear = rear->next = n;          // Add to rear
-}
+    (!rear) ? (front = rear = n) : (rear = rear->next = n); // Link at end
+}      
 
 void deleteFront() {                     // Remove front node
-    if (!front) { 
-        printf("Queue is empty!\n");      // Check if empty
-        return; 
-    }
+    if (!front ? (printf("Queue is empty!\n"), 1) : 0 ) return;// Check if empty
     Node *t = front;                     // Save front node
     front = front->next;                 // Move front ahead
     if (!front) rear = NULL;             // If last node
@@ -43,10 +35,7 @@ void deleteFront() {                     // Remove front node
 }
 
 void deleteLast() {                      // Remove rear node
-    if (!rear) { 
-        printf("Queue is empty!\n");      // Check if empty
-        return; 
-    }
+    if (!rear ? (printf("Queue is empty!\n"), 1) : 0 ) return;// Check if empty
     if (front == rear) {                 // If single node
         free(front); 
         front = rear = NULL; 
@@ -61,23 +50,17 @@ void deleteLast() {                      // Remove rear node
 }
 
 void display() {                         // Show all elements
-    if (!front) { 
-        printf("Queue is empty!\n");      // Check if empty
-        return; 
-    }
+    if (!front ? (printf("Queue is empty!\n"), 1) : 0 ) return;// Check if empty
     printf("Queue elements: ");           // Print all nodes
     for (Node *p = front; p; p = p->next) 
         printf("%d ", p->data);
-    printf("\n");
 }
 
 int main() {                             // Menu driven program
     int ch, data;                        // Choice and input vars
     do {
-        printf("\n1.Insert Front\n2.Insert Last\n3.Delete Front\n4.Delete Last\n5.Display\n6.Exit");
-        printf("\nEnter your choice: ");  // Get user choice
+        printf("\n\n1.Insert Front\n2.Insert Last\n3.Delete Front\n4.Delete Last\n5.Display\n6.Exit\nChoice:");
         scanf("%d", &ch);
-
         if (ch == 1) {                   // Insert at front
             printf("Enter data: ");
             scanf("%d", &data);
