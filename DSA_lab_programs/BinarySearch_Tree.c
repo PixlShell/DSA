@@ -1,15 +1,12 @@
 /*
-Recursion: Robotic Arm Trajectory Calculator
-
-Aim: To understand and implement a recursive backtracking algorithm to explore all possible joint configurations for a robotic arm to reach a target position.
+Aim: To implement the Binary Search algorithm for efficiently locating a transaction in a sorted list and to extend it for finding the nearest match.
 Problem Statement:
-A 6-Degree-of-Freedom (6-DOF) robotic arm must calculate all possible joint angle combinations to reach a target coordinate (x, y, z). Each joint has a maximum angle limit and moves in fixed angular increments. The program must recursively explore all valid paths (configurations) without exceeding the joint limits.
+A bank's transaction records are stored as timestamps (in HHMM format) in ascending order. Using Binary Search, find if a transaction exists at a specific time. If an exact match is not found, return the nearest transaction time.
 Input:
-•	Target coordinates: (x, y, z)
-•	Maximum angle for each of the 6 joints.
-•	Angular increment step size.
+•	A sorted list of transaction times: e.g., [930, 1000, 1130, 1400, 1600, 1800]
+•	A single timestamp to search for: e.g., 1400
 Output:
-•	The total number of valid configurations found.
-•	An array (or list) containing each valid set of 6 joint angles.
+•	For exact match: "Transaction found at index 3"
+•	For nearest match (if no exact): "No exact match found. Nearest transaction is at 1130"
 
 */
