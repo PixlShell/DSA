@@ -1,4 +1,6 @@
-/*
+/*]
+Binary Search: Search for Transaction
+
 Aim: To implement the Binary Search algorithm for efficiently locating a transaction in a sorted list and to extend it for finding the nearest match.
 Problem Statement:
 A bank's transaction records are stored as timestamps (in HHMM format) in ascending order. Using Binary Search, find if a transaction exists at a specific time. If an exact match is not found, return the nearest transaction time.
@@ -8,5 +10,4 @@ Input:
 Output:
 •	For exact match: "Transaction found at index 3"
 •	For nearest match (if no exact): "No exact match found. Nearest transaction is at 1130"
-
 */
