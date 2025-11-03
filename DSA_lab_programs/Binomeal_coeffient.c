@@ -1,13 +1,26 @@
-/*
-Binomial Coefficient: AI Decision Tree Splits
+#include <stdio.h>
 
-Aim: To calculate the number of possible attribute combinations for splitting a node in an AI decision tree using the Binomial Coefficient.
-Problem Statement:
-In the construction of a decision tree, given n total attributes at a node, calculate how many possible ways there are to choose r attributes to form a split. The solution must use the formula for combinations (Binomial Coefficient).
-Input:
-•	Total number of attributes, n (e.g., 6)
-•	Number of attributes to choose for a split, r (e.g., 2)
-Output:
-•	The number of possible split combinations: e.g., Possible split combinations = 15
+long long factorial(int n) {
+    long long fact = 1;                                            // Initialize factorial
+    for (int i = 1; i <= n; i++) fact *= i;                        // Compute n!
+    return fact;
+}
 
-*/
+long long binomialCoeff(int n, int r) {
+    if (r > n) return 0;                                           // Invalid case
+    return factorial(n) / (factorial(r) * factorial(n - r));       // nCr formula
+}
+
+int main() {
+    int n, r;                                                      // Total & chosen attributes
+    printf("Enter total number of attributes (n): ");
+    scanf("%d", &n);
+    printf("Enter number of attributes to choose (r): ");
+    scanf("%d", &r);
+
+    long long result = binomialCoeff(n, r);                        // Compute binomial coefficient
+    printf("Possible split combinations = %lld\n", result);         // Display result
+
+    return 0;
+}
+
