@@ -1,48 +1,44 @@
 // Problem 4: Modifying Pointer Addresses within Functions
-// Concept: Pass-by-reference using double pointers and realloc()
+// Concepts: Pass-by-reference using double pointers
 
-#include <stdio.h>    // For input/output functions
-#include <stdlib.h>   // For malloc(), realloc(), free(), and exit()
+#include <stdio.h>
+#include <stdlib.h>
 
-// Function to reallocate memory for an array using double pointer
-void reallocateArray(int **arr, int newSize) {
-    *arr = (int *)realloc(*arr, newSize * sizeof(int));   // Reallocate memory to new size
-
-    // Check if reallocation failed
-    if (*arr == NULL) {
+void reallocateArray(int **arr, int newSize) {              // Reallocate memory for array
+    *arr = (int *)realloc(*arr, newSize * sizeof(int));     // Resize existing array
+    if (*arr == NULL) {                                     // Check allocation failure
         printf("Memory reallocation failed!\n");
-        exit(1);                                      // Exit program if memory allocation fails
+        exit(1);                                            // Exit if memory not allocated
     }
 }
 
 int main() {
-    int n = 3;                                        // Initial array size
-    int *arr = (int *)malloc(n * sizeof(int));        // Allocate memory for 'n' integers
+    int n = 3;                                              // Initial array size
+    int *arr = (int *)malloc(n * sizeof(int));              // Allocate memory
 
-    printf("Enter %d elements: ", n);
-    for (int i = 0; i < n; i++)
-        scanf("%d", &arr[i]);                         // Input elements
+    printf("Enter %d elements: ", n);                       // Input elements
+    for (int i = 0; i < n; i++)                             // Loop for input
+        scanf("%d", &arr[i]);
 
-    printf("Original array: ");
-    for (int i = 0; i < n; i++)
-        printf("%d ", arr[i]);                        // Display original array
+    printf("Original array: ");                             // Display original array
+    for (int i = 0; i < n; i++)                             // Loop to print
+        printf("%d ", arr[i]);
     printf("\n");
 
-    int newSize;
-    printf("Enter new size: ");
-    scanf("%d", &newSize);                            // Input new array size
+    int newSize;                                            // New array size
+    printf("Enter new size: ");                             // Input new size
+    scanf("%d", &newSize);
+    reallocateArray(&arr, newSize);                         // Pass address for reallocation
 
-    reallocateArray(&arr, newSize);                   // Pass address of pointer for resizing
+    printf("Enter new elements: ");                         // Input new elements
+    for (int i = 0; i < newSize; i++)                       // Loop for input
+        scanf("%d", &arr[i]);
 
-    printf("Enter new elements: ");
-    for (int i = 0; i < newSize; i++)
-        scanf("%d", &arr[i]);                         // Input new elements
-
-    printf("Updated array: ");
-    for (int i = 0; i < newSize; i++)
-        printf("%d ", arr[i]);                        // Display updated array
+    printf("Updated array: ");                              // Display updated array
+    for (int i = 0; i < newSize; i++)                       // Loop to print
+        printf("%d ", arr[i]);
     printf("\n");
 
-    free(arr);                                        // Free allocated memory
-    return 0;
+    free(arr);                                              // Free allocated memory
+    return 0;                                               // End program
 }

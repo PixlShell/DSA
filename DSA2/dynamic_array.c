@@ -1,45 +1,41 @@
 // Problem 3: 2D Dynamic Array Allocator
-// Concept: Double pointers and dynamic memory allocation using malloc
+// Concepts: Double pointers, dynamic allocation using malloc
 
-#include <stdio.h>                                        // For input/output functions
-#include <stdlib.h>                                       // For malloc() and free()
+#include <stdio.h>
+#include <stdlib.h>
 
-// Function to allocate memory for 2D array
-int** allocateMatrix(int rows, int cols) {
+int** allocateMatrix(int rows, int cols) {             // Function to allocate 2D array
     int **matrix = (int **)malloc(rows * sizeof(int *));  // Allocate memory for row pointers
-    for (int i = 0; i < rows; i++) {
-        matrix[i] = (int *)malloc(cols * sizeof(int));    // Allocate memory for each row
-    }
-    return matrix;                                        // Return base address of 2D array
+    for (int i = 0; i < rows; i++)                       // Loop through rows
+        matrix[i] = (int *)malloc(cols * sizeof(int));    // Allocate each row
+    return matrix;                                        // Return pointer to matrix
 }
 
-// Function to free allocated memory
-void freeMatrix(int **matrix, int rows) {
-    for (int i = 0; i < rows; i++)
-        free(matrix[i]);                                  // Free each row
+void freeMatrix(int **matrix, int rows) {                 // Function to free memory
+    for (int i = 0; i < rows; i++)                       // Free each row
+        free(matrix[i]);
     free(matrix);                                         // Free row pointer array
 }
 
 int main() {
-    int rows, cols;
+    int rows, cols;                                       // Variables for matrix size
+    printf("Enter rows and columns: ");                   // Prompt user input
+    scanf("%d %d", &rows, &cols);                         // Read rows and columns
 
-    printf("Enter rows and columns: ");
-    scanf("%d %d", &rows, &cols);                        // Input number of rows and columns
+    int **mat = allocateMatrix(rows, cols);               // Allocate memory dynamically
 
-    int **mat = allocateMatrix(rows, cols);              // Create dynamic 2D array
+    printf("Enter matrix elements:\n");                   // Input matrix elements
+    for (int i = 0; i < rows; i++)                        // Loop for rows
+        for (int j = 0; j < cols; j++)                    // Loop for columns
+            scanf("%d", &mat[i][j]);                      // Read each element
 
-    printf("Enter matrix elements:\n");
-    for (int i = 0; i < rows; i++)
-        for (int j = 0; j < cols; j++)
-            scanf("%d", &mat[i][j]);                     // Input matrix elements
-
-    printf("You entered:\n");
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++)
-            printf("%d ", mat[i][j]);                   // Display matrix
-        printf("\n");
+    printf("You entered:\n");                             // Display entered matrix
+    for (int i = 0; i < rows; i++) {                      // Row loop
+        for (int j = 0; j < cols; j++)                    // Column loop
+            printf("%d ", mat[i][j]);                     // Print element
+        printf("\n");                                     // New line after each row
     }
 
-    freeMatrix(mat, rows);                              // Release allocated memory
-    return 0;
+    freeMatrix(mat, rows);                                // Free dynamically allocated memory
+    return 0;                                             // End program
 }
